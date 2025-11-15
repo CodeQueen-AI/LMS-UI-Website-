@@ -2,22 +2,25 @@
 import { useEffect, useRef } from "react";
 
 export default function StudyMarquee() {
-  const marqueeRef = useRef(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = marqueeRef.current;
+    if (!el) return; // ✅ Null check
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           el.classList.add("animate-marquee");
-          el.nextElementSibling.classList.add("animate-marquee2");
+          el.nextElementSibling?.classList.add("animate-marquee2"); // optional chaining
         } else {
           el.classList.remove("animate-marquee");
-          el.nextElementSibling.classList.remove("animate-marquee2");
+          el.nextElementSibling?.classList.remove("animate-marquee2"); // optional chaining
         }
       },
       { threshold: 0.2 }
     );
+
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
@@ -34,10 +37,8 @@ export default function StudyMarquee() {
   return (
     <>
       <style jsx>{`
-        /* ✅ Import Poppins Font */
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap");
 
-        /* ✅ Marquee Animation */
         @keyframes marqueeMove {
           0% {
             transform: translateX(0);
@@ -47,7 +48,6 @@ export default function StudyMarquee() {
           }
         }
 
-        /* ✅ Fade-in + Scale animation */
         @keyframes fadeInUp {
           0% {
             opacity: 0;
@@ -59,7 +59,6 @@ export default function StudyMarquee() {
           }
         }
 
-        /* ✅ Main marquee scrolling */
         .animate-marquee {
           display: inline-flex;
           animation: marqueeMove 25s linear infinite;
@@ -70,25 +69,21 @@ export default function StudyMarquee() {
           animation-delay: 12.5s;
         }
 
-        /* ✅ Pause on hover */
         .group:hover .animate-marquee,
         .group:hover .animate-marquee2 {
           animation-play-state: paused;
         }
 
-        /* ✅ Font */
         .font-poppins {
           font-family: "Poppins", sans-serif;
         }
 
-        /* ✅ Tag Animation */
         .tag {
           display: inline-block;
           opacity: 0;
           animation: fadeInUp 0.8s ease forwards;
         }
 
-        /* ✅ Sequential Delay */
         .tag:nth-child(1) {
           animation-delay: 0.1s;
         }
@@ -109,11 +104,9 @@ export default function StudyMarquee() {
         }
       `}</style>
 
-      {/* ✅ Marquee Section */}
       <div className="relative overflow-hidden border-t border-b border-gray-300 bg-white py-4 group font-poppins cursor-pointer">
-        {/* Infinite scroll animation */}
         <div ref={marqueeRef} className="flex whitespace-nowrap">
-          {tags.map((t, i) => (
+          {tags.concat(tags).map((t, i) => (
             <span
               key={i}
               className="tag mx-8 text-3xl font-extrabold text-[#002B5B] transition-transform duration-300 group-hover:scale-110"
@@ -122,18 +115,7 @@ export default function StudyMarquee() {
               {t.split(" ")[1]}
             </span>
           ))}
-          {tags.map((t, i) => (
-            <span
-              key={`dup-${i}`}
-              className="tag mx-8 text-3xl font-extrabold text-[#002B5B] transition-transform duration-300 group-hover:scale-110"
-            >
-              <span className="text-[#66B3FF]">{t.split(" ")[0]}</span>{" "}
-              {t.split(" ")[1]}
-            </span>
-          ))}
         </div>
-
-        {/* Duplicate for seamless loop */}
         <div className="flex absolute top-4 whitespace-nowrap opacity-0">
           {tags.map((t, i) => (
             <span
