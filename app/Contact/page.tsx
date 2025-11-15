@@ -24,7 +24,7 @@ export default function ContactPage() {
   return (
     <div className={`flex flex-col items-center ${poppins.className}`}>
       {/* ==== Banner Section ==== */}
-      <section className="relative bg-blue-200 py-24 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-32 w-full overflow-hidden shadow-sm border border-gray-200">
+      <section className="relative bg-blue-200 py-24 px-4 sm:px-8 md:px-12 lg:px-16 max-w-6xl w-full mx-auto overflow-hidden shadow-sm border border-gray-200 rounded-xl">
         {/* Floating Icons */}
         <motion.div
           animate={floatAnimation}
@@ -56,7 +56,7 @@ export default function ContactPage() {
 
         {/* Main Title */}
         <div className="relative z-10 text-center">
-          <h1 className="text-6xl font-medium text-blue-900 font-serif drop-shadow-md">
+          <h1 className="text-5xl md:text-6xl font-medium text-blue-900 font-serif drop-shadow-md">
             Contact Us
           </h1>
         </div>
@@ -68,10 +68,10 @@ export default function ContactPage() {
         whileInView="visible"
         variants={fadeUp}
         viewport={{ once: true }}
-        className="flex flex-col md:flex-row justify-between items-center gap-12 w-full max-w-[1400px] px-4 sm:px-8 md:px-16 mt-16 mb-20"
+        className="flex flex-col md:flex-row justify-between items-center gap-12 w-full max-w-6xl px-4 sm:px-8 md:px-12 lg:px-16 mt-16 mb-20"
       >
         {/* Left: Form */}
-        <div className="flex-1 w-full p-4 sm:p-8">
+        <div className="flex-1 w-full p-4 sm:p-6">
           <form className="flex flex-col gap-6">
             {/* Full Name */}
             <div className="flex flex-col">
@@ -80,7 +80,6 @@ export default function ContactPage() {
               </label>
               <input
                 type="text"
-                placeholder="Enter your name"
                 className="border-b-2 border-gray-300 focus:border-sky-900 outline-none py-2 text-sm transition-all duration-300"
               />
             </div>
@@ -92,7 +91,6 @@ export default function ContactPage() {
               </label>
               <input
                 type="email"
-                placeholder="Enter your email"
                 className="border-b-2 border-gray-300 focus:border-sky-900 outline-none py-2 text-sm transition-all duration-300"
               />
             </div>
@@ -104,7 +102,6 @@ export default function ContactPage() {
               </label>
               <textarea
                 rows={5}
-                placeholder="Write your message..."
                 className="border-b-2 border-gray-300 focus:border-sky-900 outline-none py-2 text-sm resize-none transition-all duration-300"
               ></textarea>
             </div>
@@ -130,8 +127,8 @@ export default function ContactPage() {
           <Image
             src="/Contact.jpg"
             alt="Contact illustration"
-            width={550}
-            height={450}
+            width={500}
+            height={400}
             className="object-cover rounded-lg"
           />
         </motion.div>
