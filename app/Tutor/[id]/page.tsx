@@ -1,9 +1,8 @@
-
-
 // "use client";
 
-// import { useState, useRef } from "react";
+// import { useState, useRef, useEffect } from "react";
 // import Image from "next/image";
+// import { motion } from "framer-motion";
 // import { Pencil } from "lucide-react";
 // import { FaStar } from "react-icons/fa";
 // import { Poppins } from "next/font/google";
@@ -14,7 +13,7 @@
 //   weight: ["400", "500", "600", "700"],
 // });
 
-// // ==== Tutor Data with full info ====
+// // ==== Tutor Data ====
 // const tutors = [
 //   {
 //     id: 1,
@@ -82,7 +81,6 @@
 //   },
 // ];
 
-
 // export default function TutorDetailPage() {
 //   const params = useParams();
 //   const { id } = params;
@@ -92,7 +90,6 @@
 //   const [tutorImage, setTutorImage] = useState<string | null>(null);
 //   const [editingField, setEditingField] = useState<string | null>(null);
 
-//   // Editable states
 //   const [name, setName] = useState(tutor?.name || "");
 //   const [subject, setSubject] = useState(tutor?.subject || "");
 //   const [rating, setRating] = useState(tutor?.rating || 0);
@@ -129,21 +126,37 @@
 
 //   const imageToShow = tutorImage || tutor.image;
 
-//   // Reusable Editable Box with blue left border (for Additional Info)
+//   // ==== Animations Config ====
+//   const fadeUp = {
+//     hidden: { opacity: 0, y: 40 },
+//     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+//   };
+
+//   const fadeRight = {
+//     hidden: { opacity: 0, x: 50 },
+//     visible: { opacity: 1, x: 0, transition: { duration: 0.7 } },
+//   };
+
+//   const stagger = {
+//     hidden: {},
+//     visible: {
+//       transition: {
+//         staggerChildren: 0.15,
+//       },
+//     },
+//   };
+
 //   const EditableBoxCard = ({
 //     label,
 //     value,
 //     setter,
 //     fieldKey,
 //     type = "text",
-//   }: {
-//     label: string;
-//     value: any;
-//     setter: (val: any) => void;
-//     fieldKey: string;
-//     type?: string;
-//   }) => (
-//     <div className="w-full flex border-l-4 border-blue-900 p-4 mb-4 relative group">
+//   }: any) => (
+//     <motion.div
+//       variants={fadeUp}
+//       className="w-full flex border-l-4 border-blue-900 p-4 mb-4 relative group bg-white/70 hover:shadow-md transition"
+//     >
 //       <div className="flex-1">
 //         <h4 className="text-sm font-semibold text-gray-700 mb-2">{label}</h4>
 //         {editingField === fieldKey ? (
@@ -176,24 +189,17 @@
 //       >
 //         <Pencil size={16} />
 //       </button>
-//     </div>
+//     </motion.div>
 //   );
 
-//   // Simple editable box for Left Column (phone/email/address/nationality)
 //   const EditableBox = ({
 //     label,
 //     value,
 //     setter,
 //     fieldKey,
 //     type = "text",
-//   }: {
-//     label: string;
-//     value: any;
-//     setter: (val: any) => void;
-//     fieldKey: string;
-//     type?: string;
-//   }) => (
-//     <div className="w-full relative group mt-1">
+//   }: any) => (
+//     <motion.div variants={fadeUp} className="w-full relative group mt-1">
 //       <h4 className="text-xs font-semibold text-gray-900 uppercase tracking-wide">
 //         {label}
 //       </h4>
@@ -215,16 +221,23 @@
 //       >
 //         <Pencil size={16} />
 //       </button>
-//     </div>
+//     </motion.div>
 //   );
 
 //   return (
-//     <div className={`min-h-screen flex flex-col items-start px-10 py-10 ${poppins.className}`}>
+//     <motion.div
+//       initial="hidden"
+//       animate="visible"
+//       variants={stagger}
+//       className={`min-h-screen flex flex-col items-start px-10 py-10 ${poppins.className}`}
+//     >
 //       <div className="flex flex-col md:flex-row w-full gap-10">
 
-//         {/* ==== Left Column (Profile Card) ==== */}
-//         <div className="flex flex-col items-center p-6 w-100 border border-gray-300 transform translate-y-4 hover:-translate-y-1 transition-all duration-300">
-//           {/* Profile Image */}
+//         {/* ==== Left Profile Card ==== */}
+//         <motion.div
+//           variants={fadeUp}
+//           className="flex flex-col items-center p-6 w-100 border border-gray-300 bg-white shadow-sm rounded-md transform translate-y-4 hover:-translate-y-1 transition-all duration-300"
+//         >
 //           <div className="relative group">
 //             <Image
 //               src={imageToShow}
@@ -248,7 +261,6 @@
 //             />
 //           </div>
 
-//           {/* Name */}
 //           <div className="mt-5 text-center w-full">
 //             <div className="relative group inline-block max-w-full">
 //               {editingField === "name" ? (
@@ -271,7 +283,6 @@
 //               </button>
 //             </div>
 
-//             {/* Subject Tag */}
 //             <div className="relative group mt-2">
 //               {editingField === "subject" ? (
 //                 <input
@@ -296,7 +307,6 @@
 //             </div>
 //           </div>
 
-//           {/* Rating */}
 //           <div className="mt-4 flex items-center justify-center space-x-1">
 //             {Array.from({ length: 5 }, (_, i) => (
 //               <FaStar
@@ -306,34 +316,43 @@
 //             ))}
 //           </div>
 
-//           {/* Contact Info */}
 //           <div className="mt-5 w-full text-sm text-gray-700 space-y-2">
 //             <EditableBox label="Phone Number" value={phone} setter={setPhone} fieldKey="phone" />
 //             <EditableBox label="Email" value={email} setter={setEmail} fieldKey="email" type="email" />
 //             <EditableBox label="Address" value={address} setter={setAddress} fieldKey="address" />
 //             <EditableBox label="Nationality" value={nationality} setter={setNationality} fieldKey="nationality" />
 //           </div>
-//         </div>
+//         </motion.div>
 
-//         {/* ==== Right Column (Additional Info) ==== */}
-//         <div className="flex flex-col w-full border border-gray-300 mt-5 p-6">
-//           <h2 className="text-4xl font-semibold mb-6">Additional Information</h2>
+//         {/* ==== Right Column ==== */}
+//         <motion.div
+//           variants={fadeRight}
+//           className="flex flex-col w-full border border-gray-300 bg-white p-6 rounded-md shadow-sm"
+//         >
+//           <h2 className="text-4xl font-semibold mb-6 text-blue-900">Additional Information</h2>
 
 //           <EditableBoxCard label={`${name} is qualified from`} value={qualification} setter={setQualification} fieldKey="qualifiedFrom" />
 //           <EditableBoxCard label="Introduction" value={introduction} setter={setIntroduction} fieldKey="introduction" type="textarea" />
 //           <EditableBoxCard label="Experience" value={experience} setter={setExperience} fieldKey="experience" />
 //           <EditableBoxCard label={`${name} is good at teaching`} value={subjects2} setter={setSubjects2} fieldKey="subjects2" type="textarea" />
 //           <EditableBoxCard label={`${name} can teach at different levels`} value={levels} setter={setLevels} fieldKey="levels" type="textarea" />
-//         </div>
+//         </motion.div>
 //       </div>
 
-//       {/* ==== Centered Button ==== */}
-//       <div className="flex justify-center mt-8 w-full">
-//         <button className="px-10 py-5 bg-white border-2 border-blue-900 text-blue-900 cursor-pointer font-medium shadow-md transition duration-300 hover:bg-blue-900 hover:text-white hover:border-white">
+//       {/* ==== Button ==== */}
+//       <motion.div
+//         variants={fadeUp}
+//         className="flex justify-center mt-8 w-full"
+//       >
+//         <motion.button
+//           whileHover={{ scale: 1.05 }}
+//           whileTap={{ scale: 0.97 }}
+//           className="px-10 py-5 bg-white border-2 border-blue-900 text-blue-900 cursor-pointer font-medium shadow-md transition duration-300 hover:bg-blue-900 hover:text-white hover:border-white rounded-md"
+//         >
 //           Book a Session
-//         </button>
-//       </div>
-//     </div>
+//         </motion.button>
+//       </motion.div>
+//     </motion.div>
 //   );
 // }
 
@@ -347,46 +366,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Pencil } from "lucide-react";
@@ -467,6 +449,14 @@ const tutors = [
   },
 ];
 
+interface EditableProps {
+  label: string;
+  value: string;
+  setter: (val: string) => void;
+  fieldKey: string;
+  type?: string;
+}
+
 export default function TutorDetailPage() {
   const params = useParams();
   const { id } = params;
@@ -478,7 +468,7 @@ export default function TutorDetailPage() {
 
   const [name, setName] = useState(tutor?.name || "");
   const [subject, setSubject] = useState(tutor?.subject || "");
-  const [rating, setRating] = useState(tutor?.rating || 0);
+  const [rating] = useState(tutor?.rating || 0); // setRating removed
   const [phone, setPhone] = useState(tutor?.phone || "");
   const [email, setEmail] = useState(tutor?.email || "");
   const [address, setAddress] = useState(tutor?.address || "");
@@ -532,13 +522,7 @@ export default function TutorDetailPage() {
     },
   };
 
-  const EditableBoxCard = ({
-    label,
-    value,
-    setter,
-    fieldKey,
-    type = "text",
-  }: any) => (
+  const EditableBoxCard = ({ label, value, setter, fieldKey, type = "text" }: EditableProps) => (
     <motion.div
       variants={fadeUp}
       className="w-full flex border-l-4 border-blue-900 p-4 mb-4 relative group bg-white/70 hover:shadow-md transition"
@@ -578,13 +562,7 @@ export default function TutorDetailPage() {
     </motion.div>
   );
 
-  const EditableBox = ({
-    label,
-    value,
-    setter,
-    fieldKey,
-    type = "text",
-  }: any) => (
+  const EditableBox = ({ label, value, setter, fieldKey, type = "text" }: EditableProps) => (
     <motion.div variants={fadeUp} className="w-full relative group mt-1">
       <h4 className="text-xs font-semibold text-gray-900 uppercase tracking-wide">
         {label}
@@ -741,4 +719,3 @@ export default function TutorDetailPage() {
     </motion.div>
   );
 }
-

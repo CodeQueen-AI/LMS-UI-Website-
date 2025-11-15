@@ -1,12 +1,8 @@
-
-
-
-
-
 "use client";
 import { useState } from "react";
 import { Poppins } from "next/font/google";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import Image from "next/image";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600"] });
 
@@ -237,7 +233,7 @@ export default function SignUpPage() {
 
       {/* Right Image Section */}
       <div className="w-1/2 hidden md:flex justify-center items-center">
-        <img
+        <Image
           src="/Signup.png"
           alt="Sign up illustration"
           className="object-contain h-full"

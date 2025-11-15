@@ -52,13 +52,24 @@
 //   },
 // ];
 
+// // Common scroll animation variant
+// const scrollFade = {
+//   initial: { opacity: 0, y: 50 },
+//   whileInView: { opacity: 1, y: 0 },
+//   transition: { duration: 0.7, ease: "easeOut" },
+//   viewport: { once: false, amount: 0.3 },
+// };
+
 // export default function TutorListingPage() {
 //   return (
 //     <div
 //       className={`min-h-screen flex flex-col items-center ${poppins.className}`}
 //     >
 //       {/* ===== Banner Section ===== */}
-//       <div className="w-[95%] mt-10 bg-blue-300 py-20 px-8 text-center relative overflow-hidden">
+//       <motion.div
+//         {...scrollFade}
+//         className="w-[95%] mt-10 bg-blue-300 py-20 px-8 text-center relative overflow-hidden rounded-md shadow-sm border border-blue-200"
+//       >
 //         {/* Floating Decorative Icons */}
 //         <motion.div
 //           animate={{ y: [0, -10, 0] }}
@@ -96,15 +107,20 @@
 //         <h1 className="text-6xl font-medium font-serif text-blue-950 drop-shadow-lg">
 //           Tutor Listing
 //         </h1>
-//       </div>
+//       </motion.div>
 
 //       {/* ===== Tutor Listing ===== */}
-//       <div className="w-[90%] mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-//         {tutors.map((tutor) => (
+//       <motion.div
+//         {...scrollFade}
+//         className="w-[90%] mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+//       >
+//         {tutors.map((tutor, index) => (
 //           <motion.div
 //             key={tutor.id}
-//             className="border border-gray-300 overflow-hidden cursor-pointer relative group transition-all duration-300"
+//             className="border border-gray-300 overflow-hidden cursor-pointer relative group transition-all duration-300 shadow-sm bg-white"
 //             whileHover={{ scale: 1.02 }}
+//             {...scrollFade}
+//             transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
 //           >
 //             {/* Tutor Image */}
 //             <div className="relative overflow-hidden">
@@ -114,7 +130,7 @@
 //                 className="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-105"
 //               />
 
-//               {/* Small Icon on Hover (Top Right Corner) */}
+//               {/* Hover Icon (Top Right Corner) */}
 //               <Link href={`/Tutor/${tutor.id}`}>
 //                 <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-3 group-hover:translate-x-0">
 //                   <div className="bg-white border border-sky-600 text-sky-600 rounded-full p-2 shadow-md hover:bg-sky-600 hover:text-white transition-all duration-300">
@@ -153,7 +169,7 @@
 //             </div>
 //           </motion.div>
 //         ))}
-//       </div>
+//       </motion.div>
 
 //       <div className="h-16"></div>
 //     </div>
@@ -170,20 +186,10 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Poppins } from "next/font/google";
 import {
@@ -245,9 +251,7 @@ const scrollFade = {
 
 export default function TutorListingPage() {
   return (
-    <div
-      className={`min-h-screen flex flex-col items-center ${poppins.className}`}
-    >
+    <div className={`min-h-screen flex flex-col items-center ${poppins.className}`}>
       {/* ===== Banner Section ===== */}
       <motion.div
         {...scrollFade}
@@ -306,11 +310,14 @@ export default function TutorListingPage() {
             transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
           >
             {/* Tutor Image */}
-            <div className="relative overflow-hidden">
-              <img
+            <div className="relative overflow-hidden w-full h-60">
+              <Image
                 src={tutor.image}
                 alt={tutor.name}
-                className="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-105"
+                fill
+                style={{ objectFit: "cover" }}
+                className="transition-transform duration-300 group-hover:scale-105"
+                priority
               />
 
               {/* Hover Icon (Top Right Corner) */}
@@ -336,9 +343,7 @@ export default function TutorListingPage() {
                   <FaStar
                     key={i}
                     className={`${
-                      i < Math.round(tutor.rating)
-                        ? "text-yellow-400"
-                        : "text-gray-300"
+                      i < Math.round(tutor.rating) ? "text-yellow-400" : "text-gray-300"
                     } text-sm`}
                   />
                 ))}

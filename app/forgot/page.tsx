@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Poppins } from "next/font/google";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import Image from "next/image";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600"] });
 
@@ -216,7 +217,7 @@ export default function ForgotPasswordPage() {
       </div>
 
          <div className="w-1/2 hidden md:block">
-        <img
+        <Image
           src="/forgot.avif"
           alt="Sign up illustration"
           className="h-full"

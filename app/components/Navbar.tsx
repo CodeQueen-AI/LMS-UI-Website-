@@ -18,23 +18,23 @@ export default function Navbar() {
       </div>
       <ul className="hidden md:flex space-x-6 text-gray-700 font-medium">
         <li className="relative group">
-          <a href="/" className="transition-colors duration-300 group-hover:text-blue-900">Home</a>
+          <Link href="/" className="transition-colors duration-300 group-hover:text-blue-900">Home</Link>
           <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-900 transition-all duration-300 group-hover:w-full"></span>
         </li>
         <li className="relative group">
-          <a href="/About" className="transition-colors duration-300 group-hover:text-blue-900">About</a>
+          <Link href="/About" className="transition-colors duration-300 group-hover:text-blue-900">About</Link>
           <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-900 transition-all duration-300 group-hover:w-full"></span>
         </li>
          <li className="relative group">
-          <a href="/Tutor" className="transition-colors duration-300 group-hover:text-blue-900">Tutor</a>
+          <Link href="/Tutor" className="transition-colors duration-300 group-hover:text-blue-900">Tutor</Link>
           <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-900 transition-all duration-300 group-hover:w-full"></span>
         </li>
          <li className="relative group">
-          <a href="/Map" className="transition-colors duration-300 group-hover:text-blue-900">Search</a>
+          <Link href="/Map" className="transition-colors duration-300 group-hover:text-blue-900">Search</Link>
           <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-900 transition-all duration-300 group-hover:w-full"></span>
         </li>
         <li className="relative group">
-          <a href="/Contact" className="transition-colors duration-300 group-hover:text-blue-900">Contact</a>
+          <Link href="/Contact" className="transition-colors duration-300 group-hover:text-blue-900">Contact</Link>
           <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-900 transition-all duration-300 group-hover:w-full"></span>
         </li>
       </ul>
