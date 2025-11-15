@@ -58,9 +58,6 @@ export default function ContactPage() {
         {/* Main Text */}
         <div className="relative z-10 text-center">
           <h1 className="text-6xl md:text-7xl font-serif font-medium text-blue-900 mb-4">Contact Us</h1>
-          <p className="text-xl md:text-2xl text-blue-800 mt-2">
-            Get in touch with us for any questions or support
-          </p>
         </div>
       </motion.section>
 
