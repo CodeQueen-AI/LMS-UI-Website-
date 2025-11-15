@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import { motion, easeOut } from "framer-motion"; // ✅ import easing
+import { motion, Variants, Transition, Easing } from "framer-motion";
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
@@ -9,28 +9,46 @@ const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
 });
 
+// ✅ Animation Variants
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 60 },
+  visible: (i: number = 1) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.2, duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }, // ✅ Framer Motion compatible easing
+  }),
+};
+
+const imageVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.9, y: 50 },
+  visible: (i: number = 1) => ({
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { delay: i * 0.3, duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }, // ✅ Framer Motion compatible easing
+  }),
+};
+
+// ✅ TypeScript type for grid items
+interface GridItem {
+  img: string;
+  title: string;
+  desc: string;
+  delay?: number;
+  offset?: number;
+}
+
+const gridItems: GridItem[] = [
+  { img: "/Img5.jpg", title: "Support", desc: "Commitment To Excellence", delay: 0.1, offset: 0 },
+  { img: "/Img6.jpg", title: "Maintenance", desc: "Commitment To Innovation", delay: 0.2, offset: 10 },
+  { img: "/Img7.jpg", title: "Marketing", desc: "Carefully Crafted Results", delay: 0.3, offset: 0 },
+  { img: "/Img8.jpg", title: "Planning", desc: "Future-Ready Strategies", delay: 0.4, offset: 10 },
+];
+
 export default function ConsultingSection() {
-  const fadeUp = {
-    hidden: { opacity: 0, y: 60 },
-    visible: (i = 1) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.2, duration: 0.8, ease: easeOut }, // ✅ updated
-    }),
-  };
-
-  const imageVariants = {
-    hidden: { opacity: 0, scale: 0.9, y: 50 },
-    visible: (i = 1) => ({
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: { delay: i * 0.3, duration: 0.8, ease: easeOut }, // ✅ updated
-    }),
-  };
-
   return (
     <section className={`w-full bg-white py-20 px-6 md:px-16 ${poppins.className}`}>
+      {/* ---------- Header Row (3 Columns) ---------- */}
       <motion.div
         className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10 mb-20"
         initial="hidden"
@@ -38,7 +56,7 @@ export default function ConsultingSection() {
         viewport={{ once: false, amount: 0.2 }}
       >
         {/* Left Column */}
-        <motion.div className="text-left" variants={fadeUp} custom={0.2}>
+        <motion.div className="text-left" variants={fadeUp} custom={0}>
           <p className="text-blue-500 font-medium font-serif text-xl mb-2">
             Explore our world
           </p>
@@ -48,11 +66,7 @@ export default function ConsultingSection() {
         </motion.div>
 
         {/* Center Column */}
-        <motion.div
-          className="max-w-2xl text-left"
-          variants={fadeUp}
-          custom={0.4}
-        >
+        <motion.div className="max-w-2xl text-left" variants={fadeUp} custom={1}>
           <p className="text-base leading-relaxed text-gray-700">
             Every service we offer is designed with your needs in mind. <br />
             With a strong focus on quality, consistency, and trust, we aim <br /> to
@@ -61,11 +75,7 @@ export default function ConsultingSection() {
         </motion.div>
 
         {/* Right Column */}
-        <motion.div
-          className="text-center md:text-right"
-          variants={fadeUp}
-          custom={0.6}
-        >
+        <motion.div className="text-center md:text-right" variants={fadeUp} custom={2}>
           <motion.button
             className="bg-[#003366] text-white px-8 py-3 rounded-full font-semibold whitespace-nowrap transition-all duration-300 transform hover:scale-105 hover:bg-[#4da6ff] shadow-md hover:shadow-xl cursor-pointer"
             whileHover={{
@@ -79,9 +89,9 @@ export default function ConsultingSection() {
         </motion.div>
       </motion.div>
 
-      {/* Image Grid */}
+      {/* ---------- Image Grid ---------- */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-        {[ /* your grid items */ ].map((item, i) => (
+        {gridItems.map((item, i) => (
           <motion.div
             key={i}
             className={`text-center ${item.offset ? "mt-10" : ""}`}
