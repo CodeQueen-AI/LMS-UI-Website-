@@ -13,18 +13,18 @@ const poppins = Poppins({
 export default function ContactPage() {
   const floatAnimation = {
     y: ["0%", "-12%", "0%"],
-    transition: { duration: 3.5, repeat: Infinity, ease: easeInOut }, // ✅ updated
+    transition: { duration: 3.5, repeat: Infinity, ease: easeInOut },
   };
 
   const fadeUp = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeInOut } }, // ✅ updated
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeInOut } },
   };
 
   return (
     <div className={`flex flex-col items-center ${poppins.className}`}>
       {/* ==== Banner Section ==== */}
-      <section className="relative bg-blue-200 py-24 px-8 mx-auto mt-10 mb-16 max-w-6xl overflow-hidden shadow-sm border border-gray-200">
+      <section className="relative bg-blue-200 py-24 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-32 w-full overflow-hidden shadow-sm border border-gray-200">
         {/* Floating Icons */}
         <motion.div
           animate={floatAnimation}
@@ -68,10 +68,10 @@ export default function ContactPage() {
         whileInView="visible"
         variants={fadeUp}
         viewport={{ once: true }}
-        className="flex flex-col md:flex-row justify-between items-center gap-12 w-[95%] max-w-6xl mb-20"
+        className="flex flex-col md:flex-row justify-between items-center gap-12 w-full max-w-[1400px] px-4 sm:px-8 md:px-16 mt-16 mb-20"
       >
         {/* Left: Form */}
-        <div className="flex-1 w-full p-8">
+        <div className="flex-1 w-full p-4 sm:p-8">
           <form className="flex flex-col gap-6">
             {/* Full Name */}
             <div className="flex flex-col">
@@ -124,15 +124,15 @@ export default function ContactPage() {
         {/* Right: Image */}
         <motion.div
           animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: easeInOut }} // ✅ updated
+          transition={{ duration: 5, repeat: Infinity, ease: easeInOut }}
           className="flex-1 w-full flex justify-center"
         >
           <Image
-            src="/Contact.jpg" // 👈 replace with your actual image path
+            src="/Contact.jpg"
             alt="Contact illustration"
-            width={500}
-            height={400}
-            className="object-cover"
+            width={550}
+            height={450}
+            className="object-cover rounded-lg"
           />
         </motion.div>
       </motion.div>
