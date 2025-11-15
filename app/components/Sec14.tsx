@@ -1,24 +1,21 @@
-
-"use client";
+'use client';
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, easeOut } from "framer-motion"; // ✅ import easing
 import { Poppins } from "next/font/google";
 
-// ✅ Load Poppins font
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
 
 export default function FutureSection() {
-  // Animation Variants
   const fadeUp = {
     hidden: { opacity: 0, y: 60 },
     visible: (i = 1) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: i * 0.2, duration: 0.8, ease: "easeOut" },
+      transition: { delay: i * 0.2, duration: 0.8, ease: easeOut }, // ✅ updated
     }),
   };
 
@@ -27,7 +24,7 @@ export default function FutureSection() {
     visible: (i = 1) => ({
       opacity: 1,
       x: 0,
-      transition: { delay: i * 0.15, duration: 0.6, ease: "easeOut" },
+      transition: { delay: i * 0.15, duration: 0.6, ease: easeOut }, // ✅ updated
     }),
   };
 
@@ -39,11 +36,10 @@ export default function FutureSection() {
         className="w-full max-w-6xl flex flex-col md:flex-row justify-between items-start gap-10"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: false, amount: 0.3 }} // 🔁 re-animates on scroll
+        viewport={{ once: false, amount: 0.3 }}
       >
         {/* LEFT SIDE */}
         <div className="md:w-1/2">
-          {/* Heading */}
           <motion.div variants={fadeUp} custom={1} className="mb-10">
             <h1 className="text-6xl font-serif font-medium text-blue-950 leading-tight">
               Start Building Your <br /> Future Today
@@ -53,7 +49,6 @@ export default function FutureSection() {
             </p>
           </motion.div>
 
-          {/* Main Image */}
           <motion.div
             variants={fadeUp}
             custom={2}
@@ -70,7 +65,6 @@ export default function FutureSection() {
             />
           </motion.div>
 
-          {/* Power of Consistency */}
           <motion.div variants={fadeUp} custom={3}>
             <h3 className="font-semibold text-xl text-[#002B5B]">
               Power of Consistency
@@ -115,17 +109,13 @@ export default function FutureSection() {
               key={i}
               variants={cardFade}
               custom={i}
-            //   whileHover={{
-            //     scale: 1.02,
-            //     boxShadow: "0 6px 20px rgba(0,0,0,0.1)",
-            //   }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.3 }} // ✅ updated
               className="flex gap-4 items-start p-4 border border-gray-300 bg-white backdrop-blur-sm cursor-pointer"
             >
               <motion.div
                 whileHover={{ rotate: 5 }}
                 transition={{ type: "spring", stiffness: 200 }}
-                className="overflow-hidden "
+                className="overflow-hidden"
               >
                 <Image
                   src={card.img}
@@ -146,14 +136,3 @@ export default function FutureSection() {
     </section>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
