@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, easeOut } from "framer-motion";
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
@@ -23,14 +23,12 @@ export default function FeaturesSection() {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { delay: i * 0.2, duration: 0.8, ease: "easeOut" },
+      transition: { delay: i * 0.2, duration: 0.8, ease: easeOut }, // ✅ updated
     }),
   };
 
   return (
-    <section
-      className={`${poppins.className} py-16 px-6 md:px-20 text-center`}
-    >
+    <section className={`${poppins.className} py-16 px-6 md:px-20 text-center`}>
       <motion.div
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10"
         initial="hidden"
@@ -42,8 +40,7 @@ export default function FeaturesSection() {
             key={index}
             variants={fadeUp}
             custom={index}
-            transition={{ duration: 0.4 }}
-            className="flex flex-col items-center text-center space-y-4 border border-gray-400 cursor-pointer py-10 px-6 min-h-[250px] "
+            className="flex flex-col items-center text-center space-y-4 border border-gray-400 cursor-pointer py-10 px-6 min-h-[250px]"
           >
             {/* Feature Image */}
             <motion.div
@@ -60,9 +57,7 @@ export default function FeaturesSection() {
             </motion.div>
 
             {/* Text */}
-            <h3 className="text-2xl font-semibold text-blue-900">
-              {feature.title}
-            </h3>
+            <h3 className="text-2xl font-semibold text-blue-900">{feature.title}</h3>
             <p className="text-gray-700 text-sm">{feature.subtitle}</p>
           </motion.div>
         ))}
