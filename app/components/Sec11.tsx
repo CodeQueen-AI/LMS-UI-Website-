@@ -1,7 +1,7 @@
 'use client';
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, easeInOut, easeOut } from "framer-motion"; // ✅ import easing
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
@@ -24,7 +24,7 @@ export default function BrilliantHeroClone() {
   const floatAnim = {
     animate: {
       y: [0, -10, 0],
-      transition: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+      transition: { duration: 3, repeat: Infinity, ease: easeInOut }, // ✅ updated
     },
   };
 
@@ -61,14 +61,8 @@ export default function BrilliantHeroClone() {
           {/* Main SVG */}
           <motion.div
             className="relative w-[520px] h-[420px]"
-            animate={{
-              rotate: [0, 1.2, -1.2, 0],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            animate={{ rotate: [0, 1.2, -1.2, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: easeInOut }} // ✅ updated
           >
             <svg viewBox="0 0 520 420" className="w-full h-full">
               {/* Planet */}
@@ -89,7 +83,7 @@ export default function BrilliantHeroClone() {
                 strokeLinecap="round"
                 initial={{ pathLength: 0 }}
                 whileInView={{ pathLength: 1 }}
-                transition={{ duration: 1.2, ease: "easeInOut" }}
+                transition={{ duration: 1.2, ease: easeInOut }} // ✅ updated
               />
               <polygon points="236,92 246,82 232,84" fill="#111827" />
 
@@ -104,7 +98,7 @@ export default function BrilliantHeroClone() {
                 strokeLinecap="round"
                 initial={{ pathLength: 0 }}
                 whileInView={{ pathLength: 1 }}
-                transition={{ duration: 1.3, ease: "easeInOut", delay: 0.4 }}
+                transition={{ duration: 1.3, ease: easeInOut, delay: 0.4 }} // ✅ updated
               />
               <polygon points="354,206 366,214 354,222" fill="#111827" />
 
@@ -125,7 +119,7 @@ export default function BrilliantHeroClone() {
                 strokeLinecap="round"
                 initial={{ pathLength: 0 }}
                 whileInView={{ pathLength: 1 }}
-                transition={{ duration: 1.2, ease: "easeOut", delay: 0.8 }}
+                transition={{ duration: 1.2, ease: easeOut, delay: 0.8 }} // ✅ updated
               />
               <polygon points="320,190 336,202 318,206" fill="#34d06b" />
 
@@ -133,7 +127,7 @@ export default function BrilliantHeroClone() {
               <motion.g
                 transform="translate(220,68)"
                 animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 3, repeat: Infinity, ease: easeInOut }} // ✅ updated
               >
                 <ellipse cx="0" cy="0" rx="44" ry="16" fill="#cfd7db" />
                 <ellipse cx="0" cy="-6" rx="30" ry="10" fill="#0f1624" />
