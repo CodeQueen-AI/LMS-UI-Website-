@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, easeInOut } from "framer-motion";
 import { Poppins } from "next/font/google";
 import { FaEnvelope, FaPhoneAlt, FaPaperPlane, FaUserAlt } from "react-icons/fa";
 import Image from "next/image";
@@ -13,18 +13,18 @@ const poppins = Poppins({
 export default function ContactPage() {
   const floatAnimation = {
     y: ["0%", "-12%", "0%"],
-    transition: { duration: 3.5, repeat: Infinity, ease: "easeInOut" },
+    transition: { duration: 3.5, repeat: Infinity, ease: easeInOut }, // ✅ updated
   };
 
   const fadeUp = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeInOut } }, // ✅ updated
   };
 
   return (
     <div className={`flex flex-col items-center ${poppins.className}`}>
       {/* ==== Banner Section ==== */}
-      <section className="relative bg-blue-200 py-24 px-96 mx-auto mt-10 mb-16 max-w-6xl overflow-hidden shadow-sm border border-gray-200 ">
+      <section className="relative bg-blue-200 py-24 px-8 mx-auto mt-10 mb-16 max-w-6xl overflow-hidden shadow-sm border border-gray-200">
         {/* Floating Icons */}
         <motion.div
           animate={floatAnimation}
@@ -34,21 +34,21 @@ export default function ContactPage() {
         </motion.div>
 
         <motion.div
-          animate={{ ...floatAnimation, transition: { duration: 4, repeat: Infinity } }}
+          animate={{ ...floatAnimation, transition: { duration: 4, repeat: Infinity, ease: easeInOut } }}
           className="absolute bottom-12 left-1/4 text-yellow-500 opacity-60 text-4xl"
         >
           <FaPhoneAlt />
         </motion.div>
 
         <motion.div
-          animate={{ ...floatAnimation, transition: { duration: 5, repeat: Infinity } }}
+          animate={{ ...floatAnimation, transition: { duration: 5, repeat: Infinity, ease: easeInOut } }}
           className="absolute top-16 right-20 text-green-500 opacity-60 text-4xl"
         >
           <FaPaperPlane />
         </motion.div>
 
         <motion.div
-          animate={{ ...floatAnimation, transition: { duration: 3.8, repeat: Infinity } }}
+          animate={{ ...floatAnimation, transition: { duration: 3.8, repeat: Infinity, ease: easeInOut } }}
           className="absolute bottom-8 right-1/4 text-pink-500 opacity-60 text-4xl"
         >
           <FaUserAlt />
@@ -71,7 +71,7 @@ export default function ContactPage() {
         className="flex flex-col md:flex-row justify-between items-center gap-12 w-[95%] max-w-6xl mb-20"
       >
         {/* Left: Form */}
-        <div className="flex-1 w-full  p-8">
+        <div className="flex-1 w-full p-8">
           <form className="flex flex-col gap-6">
             {/* Full Name */}
             <div className="flex flex-col">
@@ -124,7 +124,7 @@ export default function ContactPage() {
         {/* Right: Image */}
         <motion.div
           animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 5, repeat: Infinity, ease: easeInOut }} // ✅ updated
           className="flex-1 w-full flex justify-center"
         >
           <Image
