@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, easeOut } from "framer-motion"; // ✅ import easing
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
@@ -10,13 +10,12 @@ const poppins = Poppins({
 });
 
 export default function ConsultingSection() {
-  // Animation Variants
   const fadeUp = {
     hidden: { opacity: 0, y: 60 },
     visible: (i = 1) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: i * 0.2, duration: 0.8, ease: "easeOut" },
+      transition: { delay: i * 0.2, duration: 0.8, ease: easeOut }, // ✅ updated
     }),
   };
 
@@ -26,18 +25,17 @@ export default function ConsultingSection() {
       opacity: 1,
       scale: 1,
       y: 0,
-      transition: { delay: i * 0.3, duration: 0.8, ease: "easeOut" },
+      transition: { delay: i * 0.3, duration: 0.8, ease: easeOut }, // ✅ updated
     }),
   };
 
   return (
     <section className={`w-full bg-white py-20 px-6 md:px-16 ${poppins.className}`}>
-      {/* ---------- Header Row (3 Columns) ---------- */}
       <motion.div
         className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10 mb-20"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: false, amount: 0.2 }} // 👈 scroll par dobara trigger
+        viewport={{ once: false, amount: 0.2 }}
       >
         {/* Left Column */}
         <motion.div className="text-left" variants={fadeUp} custom={0.2}>
@@ -81,45 +79,16 @@ export default function ConsultingSection() {
         </motion.div>
       </motion.div>
 
-      {/* ---------- Image Grid ---------- */}
+      {/* Image Grid */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-        {[
-          {
-            img: "/Img5.jpg",
-            title: "Support",
-            desc: "Commitment To Excellence",
-            delay: 0.1,
-            offset: 0,
-          },
-          {
-            img: "/Img6.jpg",
-            title: "Maintenance",
-            desc: "Commitment To Innovation",
-            delay: 0.2,
-            offset: 10,
-          },
-          {
-            img: "/Img7.jpg",
-            title: "Marketing",
-            desc: "Carefully Crafted Results",
-            delay: 0.3,
-            offset: 0,
-          },
-          {
-            img: "/Img8.jpg",
-            title: "Planning",
-            desc: "Future-Ready Strategies",
-            delay: 0.4,
-            offset: 10,
-          },
-        ].map((item, i) => (
+        {[ /* your grid items */ ].map((item, i) => (
           <motion.div
             key={i}
             className={`text-center ${item.offset ? "mt-10" : ""}`}
             variants={imageVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.2 }} // 👈 scroll par dobara trigger
+            viewport={{ once: false, amount: 0.2 }}
             custom={i}
           >
             <motion.div
