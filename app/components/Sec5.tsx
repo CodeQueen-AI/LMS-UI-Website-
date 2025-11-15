@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, easeOut } from "framer-motion";
 import {
   Poppins,
   Playfair_Display,
@@ -41,7 +41,7 @@ export default function EducationFontsSection() {
     { name: "Education", className: indie.className },
   ];
 
-  // ✨ Animation Variants
+  // ✅ Animation Variants with TypeScript compatible easing
   const fadeUp = {
     hidden: { opacity: 0, y: 60, scale: 0.95 },
     visible: (i = 1) => ({
@@ -51,7 +51,7 @@ export default function EducationFontsSection() {
       transition: {
         delay: i * 0.15,
         duration: 0.6,
-        ease: "easeOut",
+        ease: easeOut,
       },
     }),
   };
