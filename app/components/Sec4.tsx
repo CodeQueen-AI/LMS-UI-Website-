@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import { motion, Variants, Transition, Easing } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
@@ -15,7 +15,7 @@ const fadeUp: Variants = {
   visible: (i: number = 1) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.2, duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }, // ✅ Framer Motion compatible easing
+    transition: { delay: i * 0.2, duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }, // Framer Motion compatible easing
   }),
 };
 
@@ -25,7 +25,7 @@ const imageVariants: Variants = {
     opacity: 1,
     scale: 1,
     y: 0,
-    transition: { delay: i * 0.3, duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }, // ✅ Framer Motion compatible easing
+    transition: { delay: i * 0.3, duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }, // Framer Motion compatible easing
   }),
 };
 
