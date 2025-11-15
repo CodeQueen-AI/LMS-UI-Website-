@@ -27,7 +27,7 @@ export default function ContactPage() {
       {/* ==================== BANNER ==================== */}
       <motion.section
         {...scrollFade}
-        className="relative bg-blue-200 py-24 px-4 sm:px-8 md:px-12 lg:px-16 max-w-6xl mx-auto mt-10 mb-10 overflow-hidden shadow-sm border border-gray-300 rounded-xl"
+        className="relative bg-blue-200 py-24 px-4 sm:px-8 md:px-12 lg:px-16 max-w-6xl mx-auto mt-10 mb-10 overflow-hidden shadow-sm border border-gray-300"
       >
         {/* Floating Icons */}
         <motion.div className="absolute top-10 left-10 text-blue-800" animate={floatAnimation}>
